@@ -16,6 +16,7 @@ class Sigmoid(BaseActivation):
     def __init__(self):
         pass
 
+    @staticmethod
     def _sigmoid(y: np.ndarray) -> np.ndarray:
         return 1 / (1 + np.exp(-y))
 
@@ -29,7 +30,8 @@ class Sigmoid(BaseActivation):
 class Relu(BaseActivation):
     def __init__(self):
         pass
-
+    
+    @staticmethod
     def _relu(y: np.ndarray) -> np.ndarray:
         return np.max(0, y)
 

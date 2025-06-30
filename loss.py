@@ -61,3 +61,19 @@ class Hists(BaseMetric):
         plt.legend()
         plt.grid()
         plt.show()
+
+
+# TODO: переделать под нужный интерфейс
+class CrossEntropyLoss(BaseMetric):
+    def __init__(self):
+        super().__init__()
+
+    @staticmethod
+    def loss(y_true: np.ndarray, y_pred: np.ndarray) -> float:
+        return -1 * np.mean(y_true * np.log(y_pred) + (1 - y_true) * np.log(1 - y_pred), axis=0)
+
+    @staticmethod
+    def decent_loss(X: np.ndarray, y_true: np.ndarray, y_pred: np.ndarray) -> tuple[np.ndarray]:
+        d_w = (y_true / y_pred + (1 - y_true) / (1 - y_pred)) @ X
+        d_b = np.mean(y_true / y_pred + (1 - y_true) / (1 - y_pred), axis=0)
+        return d_w, d_b
